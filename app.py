@@ -1,6 +1,6 @@
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+# import smtplib
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
 from flask import Flask, request,make_response,jsonify,render_template
 from flask import Response
 import os
