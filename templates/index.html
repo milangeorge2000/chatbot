@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sentiment Analyser</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='sentimental.css')}}">
+
+    </head>
+    <body>
+
+
+       
+        
+ <div class='sen'>
+        <h1>Sentiment Analayser</h1>
+        </div>
+        <form action="/predict" method="post">
+        
+            <div class="sen">
+          <textarea name='textarea' rows="20" cols="50" ></textarea>
+          </div>
+        
+        
+        <div id="sent">
+          <input type="submit" value="Predict">
+        </div>
+        </form>
+        <div class="sen">
+        <h1 >{{info}}</h1>
+          </div>
+        
+            </body>
+        </html>
