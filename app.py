@@ -18,73 +18,73 @@ def home():
 
 
 
-@app.route('/webhook', methods=['POST'])
-def webhook():
+# @app.route('/webhook', methods=['POST'])
+# def webhook():
 
-    req = request.get_json(silent=True, force=True)
+#     req = request.get_json(silent=True, force=True)
 
-    #print("Request:")
-    #print(json.dumps(req, indent=4))
+#     #print("Request:")
+#     #print(json.dumps(req, indent=4))
 
-    res = processRequest(req)
-    res = json.dumps(res, indent=4)
-    #print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
-
-
-def processRequest(req):
+#     res = processRequest(req)
+#     res = json.dumps(res, indent=4)
+#     #print(res)
+#     r = make_response(res)
+#     r.headers['Content-Type'] = 'application/json'
+#     return r
 
 
-    sessionID=req.get('responseId')
+# def processRequest(req):
 
 
-    result = req.get("queryResult")
-    user_says=result.get("queryText")
-    parameters = result.get("parameters")
-    cust_name=parameters.get("cust_name")
-    cust_contact = parameters.get("cust_phone")
-    cust_email=parameters.get("cust_email")
-    work_name= parameters.get("topic_name")
-    intent = result.get("intent").get('displayName')
-    try:
-      if (intent=='Products' or intent == 'Default Fallback Intent - custom - no'):
-        message = MIMEMultipart()
+#     sessionID=req.get('responseId')
 
-        sender_address = 'amphflow723@gmail.com'
-        sender_pass = '723@AMPhflow'
 
-        mail_content = "Thank you visiting our page. Our Support team will call you soon"
+#     result = req.get("queryResult")
+#     user_says=result.get("queryText")
+#     parameters = result.get("parameters")
+#     cust_name=parameters.get("cust_name")
+#     cust_contact = parameters.get("cust_phone")
+#     cust_email=parameters.get("cust_email")
+#     work_name= parameters.get("topic_name")
+#     intent = result.get("intent").get('displayName')
+#     try:
+#       if (intent=='Products' or intent == 'Default Fallback Intent - custom - no'):
+#         message = MIMEMultipart()
 
-        receiver_address = cust_email
-        contact_address = "amaluanayu@gmail.com"
+#         sender_address = 'amphflow723@gmail.com'
+#         sender_pass = '723@AMPhflow'
 
-        message['From'] = sender_address
-        message['To'] = receiver_address
-        message['Subject'] = 'Amphflow Service Mail'
-        message.attach(MIMEText(mail_content, 'plain'))
+#         mail_content = "Thank you visiting our page. Our Support team will call you soon"
 
-        #Create SMTP session for sending the mail
-        session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
+#         receiver_address = cust_email
+#         contact_address = "amaluanayu@gmail.com"
 
-        session.starttls() #enable security
-        session.login(sender_address, sender_pass) #login with mail_id and password
-        text = message.as_string()
-        session.sendmail(sender_address, receiver_address, text)
-        session.sendmail(sender_address,contact_address , text)
-        session.quit()
-        fulfillmentText="We have sent the course syllabus"
-        return {
-            "fulfillmentText": fulfillmentText
-        }
+#         message['From'] = sender_address
+#         message['To'] = receiver_address
+#         message['Subject'] = 'Amphflow Service Mail'
+#         message.attach(MIMEText(mail_content, 'plain'))
 
-    except ValueError:
-        return Response("Error Occurred! %s" %ValueError)
-    except KeyError:
-        return Response("Error Occurred! %s" %KeyError)
-    except Exception as e:
-        return Response("Error Occurred! %s" %e)
+#         #Create SMTP session for sending the mail
+#         session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
+
+#         session.starttls() #enable security
+#         session.login(sender_address, sender_pass) #login with mail_id and password
+#         text = message.as_string()
+#         session.sendmail(sender_address, receiver_address, text)
+#         session.sendmail(sender_address,contact_address , text)
+#         session.quit()
+#         fulfillmentText="We have sent the course syllabus"
+#         return {
+#             "fulfillmentText": fulfillmentText
+#         }
+
+#     except ValueError:
+#         return Response("Error Occurred! %s" %ValueError)
+#     except KeyError:
+#         return Response("Error Occurred! %s" %KeyError)
+#     except Exception as e:
+#         return Response("Error Occurred! %s" %e)
 
 
 
