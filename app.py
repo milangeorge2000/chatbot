@@ -9,9 +9,6 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
 
 
@@ -34,57 +31,57 @@ def webhook():
     return r
 
 
-# def processRequest(req):
+def processRequest(req):
 
 
-#     sessionID=req.get('responseId')
+    sessionID=req.get('responseId')
 
 
-#     result = req.get("queryResult")
-#     user_says=result.get("queryText")
-#     parameters = result.get("parameters")
-#     cust_name=parameters.get("cust_name")
-#     cust_contact = parameters.get("cust_phone")
-#     cust_email=parameters.get("cust_email")
-#     work_name= parameters.get("topic_name")
-#     intent = result.get("intent").get('displayName')
-#     try:
-#       if (intent=='Products' or intent == 'Default Fallback Intent - custom - no'):
-#         message = MIMEMultipart()
+    result = req.get("queryResult")
+    user_says=result.get("queryText")
+    parameters = result.get("parameters")
+    cust_name=parameters.get("cust_name")
+    cust_contact = parameters.get("cust_phone")
+    cust_email=parameters.get("cust_email")
+    work_name= parameters.get("topic_name")
+    intent = result.get("intent").get('displayName')
+    try:
+      if (intent=='Products' or intent == 'Default Fallback Intent - custom - no'):
+        message = MIMEMultipart()
 
-#         sender_address = 'amphflow723@gmail.com'
-#         sender_pass = '723@AMPhflow'
+        sender_address = 'amphflow723@gmail.com'
+        sender_pass = '723@AMPhflow'
 
-#         mail_content = "Thank you visiting our page. Our Support team will call you soon"
+        mail_content = "Thank you visiting our page. Our Support team will call you soon"
 
-#         receiver_address = cust_email
-#         contact_address = "amaluanayu@gmail.com"
+        receiver_address = cust_email
+        contact_address = "amaluanayu@gmail.com"
 
-#         message['From'] = sender_address
-#         message['To'] = receiver_address
-#         message['Subject'] = 'Amphflow Service Mail'
-#         message.attach(MIMEText(mail_content, 'plain'))
+        message['From'] = sender_address
+        message['To'] = receiver_address
+        message['Subject'] = 'Amphflow Service Mail'
+        message.attach(MIMEText(mail_content, 'plain'))
 
-#         #Create SMTP session for sending the mail
-#         session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
+        #Create SMTP session for sending the mail
+        session = smtplib.SMTP('smtp.gmail.com', 587) #use gmail with port
 
-#         session.starttls() #enable security
-#         session.login(sender_address, sender_pass) #login with mail_id and password
-#         text = message.as_string()
-#         session.sendmail(sender_address, receiver_address, text)
-#         session.sendmail(sender_address,contact_address , text)
-#         session.quit()
-#         fulfillmentText="We have sent the course syllabus"
-#         return {
-#             "fulfillmentText": fulfillmentText
-#         }
+        session.starttls() #enable security
+        session.login(sender_address, sender_pass) #login with mail_id and password
+        text = message.as_string()
+        session.sendmail(sender_address, receiver_address, text)
+        session.sendmail(sender_address,contact_address , text)
+        session.quit()
+        fulfillmentText="We have sent the course syllabus"
+        return {
+            "fulfillmentText": fulfillmentText
+        }
 
-#     except ValueError:
-#         return Response("Error Occurred! %s" %ValueError)
-#     except KeyError:
-#         return Response("Error Occurred! %s" %KeyError)
-#     except Exception as e:
-#         return Response("Error Occurred! %s" %e)
+    except ValueError:
+        return Response("Error Occurred! %s" %ValueError)
+    except KeyError:
+        return Response("Error Occurred! %s" %KeyError)
+    except Exception as e:
+        return Response("Error Occurred! %s" %e)
 
 
 
