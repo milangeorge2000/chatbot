@@ -71,7 +71,7 @@ def processRequest(req):
         session.sendmail(sender_address, receiver_address, text)
         session.sendmail(sender_address,contact_address , text)
         session.quit()
-        fulfillmentText="We have sent the course syllabus"
+        fulfillmentText="We have sent your details to the support team. They will contact you soon"
         return {
             "fulfillmentText": fulfillmentText
         }
